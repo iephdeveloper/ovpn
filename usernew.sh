@@ -14,7 +14,7 @@ echo -e "====SSH Account Information====" | lolcat
 echo -e "Host: $IP"
 echo -e "Username: $Login "
 echo -e "Password: $Pass" 
-echo -e "Config OpenVPN (TCP 1194): http://$IP:86client.ovpn"
+echo -e "Config OpenVPN (TCP 1194): http://$IP:86/client.ovpn"
 echo -e "-----------------------------" | lolcat
 echo -e "Expiration: $exp"
 echo -e "=============================" | lolcat
