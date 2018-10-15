@@ -30,16 +30,15 @@ apt-get update
 apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar
 echo "clear"                                                              >> .bashrc
 echo 'echo -e "\e[0m                                                   "' >> .bashrc
-echo 'echo -e "\e[94m    :::::::::  :::::::::   ::::::::  :::   :::    "' >> .bashrc
-echo 'echo -e "\e[94m    :+:    :+: :+:    :+: :+:    :+: :+:   :+:    "' >> .bashrc
-echo 'echo -e "\e[94m    +:+    +:+ +:+    +:+        +:+  +:+ +:+     "' >> .bashrc
-echo 'echo -e "\e[94m    +#+    +:+ +#++:++#:      +#++:    +#++:      "' >> .bashrc
-echo 'echo -e "\e[94m    +#+    +#+ +#+    +#+        +#+    +#+       "' >> .bashrc
-echo 'echo -e "\e[94m    #+#    #+# #+#    #+# #+#    #+#    #+#       "' >> .bashrc
-echo 'echo -e "\e[94m    #########  ###    ###  ########     ###       "' >> .bashrc
-echo 'echo -e "\e[94m           AutoScriptVPS by  _Dreyannz_           "' >> .bashrc
+echo 'echo -e "\e[0;34m██╗███████╗██████╗ ██╗  ██╗"' >> .bashrc
+echo 'echo -e "\e[0;34m██║██╔════╝██╔══██╗██║  ██║"' >> .bashrc
+echo 'echo -e "\e[0;34m██║█████╗  ██████╔╝███████║"' >> .bashrc
+echo 'echo -e "\e[0;34m██║██╔══╝  ██╔═══╝ ██╔══██║"' >> .bashrc
+echo 'echo -e "\e[0;34m██║███████╗██║     ██║  ██║"' >> .bashrc
+echo 'echo -e "\e[0;34m╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝"' >> .bashrc
+echo 'echo -e "\e[94m           Script by  PHC-Raf                     "' >> .bashrc
 echo 'echo -e "\e[0m"'                                                    >> .bashrc
-echo 'echo -e "\e[94m             [create]            "' >> .bashrc
+echo 'echo -e "\e[94m             type menu to see menu list            "' >> .bashrc
 echo 'echo -e "\e[0m                                                   "' >> .bashrc
 
 # Install WebServer
@@ -50,10 +49,6 @@ cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Dreyannz/AutoScriptVPS/master/Files/Nginx/nginx.conf"
-mkdir -p /home/vps/public_html
-echo "<h1><center>AutoScriptVPS by _Dreyannz_</center></h1>" > /home/vps/public_html/index.html
-echo "<h3><center>For More Info Visit My <a href="https://github.com/Dreyannz">Github Repositories</a></center><h3>" >> /home/vps/public_html/index.html
-echo "<h3><center>You Can Also Contact Me at <a href="https://www.facebook.com/Dreyannz">Facebook</a> and <a href="https://twitter.com/Dreyannz">Twitter</a></center></h3>" >> /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Dreyannz/AutoScriptVPS/master/Files/Nginx/vps.conf"
 service nginx restart
 
@@ -145,3 +140,127 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
+# install ddos deflate
+cd
+apt-get -y install dnsutils dsniff
+wget https://raw.githubusercontent.com/iephdevs/devs/master/ddos-deflate-master.zip 
+unzip ddos-deflate-master.zip
+cd ddos-deflate-master
+./install.sh
+rm -rf /root/ddos-deflate-master.zip 
+
+# teks berwarna
+apt-get -y install ruby
+gem install lolcat
+
+# install fail2banapt-get -y install fail2ban;
+service fail2ban restart 
+
+# install ddos deflate
+cd
+apt-get -y install dnsutils dsniff
+wget https://raw.githubusercontent.com/iephdevs/devs/master/ddos-deflate-master.zip 
+unzip ddos-deflate-master.zip
+cd ddos-deflate-master
+./install.sh
+rm -rf /root/ddos-deflate-master.zip 
+
+# bannerrm /etc/issue.net
+wget -O /etc/issue.net "https://raw.githubusercontent.com/iephdevs/devs/master/issue.net"
+sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
+sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
+service ssh restart
+service dropbear restart
+
+#xml parser
+cd
+apt-get -y --force-yes -f install libxml-parser-perl
+
+# download script
+cd /usr/bin
+wget -O menu "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/menu.sh"
+wget -O usernew "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/usernew.sh"
+wget -O trial "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/trial.sh"
+wget -O delete "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/hapus.sh"
+wget -O check "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/user-login.sh"
+wget -O member "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/user-list.sh"
+wget -O restart "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/resvis.sh"
+wget -O speedtest "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/speedtest_cli.py"
+wget -O info "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/info.sh"
+wget -O about "https://raw.githubusercontent.com/iephdeveloper/ovpn/master/about.sh"
+
+echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
+
+chmod +x menu
+chmod +x usernew
+chmod +x trial
+chmod +x delete
+chmod +x check
+chmod +x member
+chmod +x restart
+chmod +x speedtest
+chmod +x info
+chmod +x about
+
+# finishing
+cd
+chown -R www-data:www-data /home/vps/public_html
+service nginx start
+service openvpn restart
+service cron restart
+service ssh restart
+service dropbear restart
+service squid3 restart
+service webmin restart
+rm -rf ~/.bash_history && history -c
+echo "unset HISTFILE" >> /etc/profile
+
+# install neofetch
+echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
+curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
+apt-get update
+apt-get install neofetch
+
+echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
+curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
+apt-get update
+apt-get install neofetch
+
+# info
+clear
+echo "Autoscript Include:" | tee log-install.txt
+echo "===========================================" | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Service"  | tee -a log-install.txt
+echo "-------"  | tee -a log-install.txt
+echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
+echo "nginx    : 86"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Script"  | tee -a log-install.txt
+echo "------"  | tee -a log-install.txt
+echo "menu (Displays a list of available commands)"  | tee -a log-install.txt
+echo "usernew (Creating an OVPN Account)"  | tee -a log-install.txt
+echo "trial (Create a Trial Account)"  | tee -a log-install.txt
+echo "delete (Clearing OVPN Account)"  | tee -a log-install.txt
+echo "check (Check User Login)"  | tee -a log-install.txt
+echo "member (Check Member OVPN)"  | tee -a log-install.txt
+echo "restart (Restart Service openvpn)"  | tee -a log-install.txt
+echo "reboot (Reboot VPS)"  | tee -a log-install.txt
+echo "speedtest (Speedtest VPS)"  | tee -a log-install.txt
+echo "info (System Information)"  | tee -a log-install.txt
+echo "about (Information about auto install script)"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Other features"  | tee -a log-install.txt
+echo "----------"  | tee -a log-install.txt
+echo "Timezone : Asia/Manila (GMT +7)"  | tee -a log-install.txt
+echo "IPv6     : [off]"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Modified by IEPH DEVELOPERS"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Installation Log --> /root/log-install.txt"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "VPS AUTO REBOOT TIME HOURS 12 NIGHT"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "==========================================="  | tee -a log-install.txt
+cd
+rm -f /root/ovpn
