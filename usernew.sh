@@ -1,22 +1,62 @@
 #!/bin/bash
-#Script auto create user SSH
+# Script by : _Dreyannz_
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
+echo -e "\e[0m                                                   "
+read -p "         Username       :  " User
 
-read -p "Username : " Login
-read -p "Password : " Pass
-read -p "Expired (day): " Activetime
-
-IP=`dig +short myip.opendns.com @resolver1.opendns.com`
-useradd -e `date -d "$Activetime days" +"%Y-%m-%d"` -s /bin/false -M $Login
-exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
-echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
-echo -e ""
-echo -e "====SSH Account Information====" | lolcat
-echo -e "Host: $IP"
-echo -e "Username: $Login "
-echo -e "Password: $Pass" 
-echo -e "Config OpenVPN (TCP 1194): http://$IP:86/client.ovpn"
-echo -e "-----------------------------" | lolcat
-echo -e "Expiration: $exp"
-echo -e "=============================" | lolcat
-echo -e "Mod by IEPH DEVELOPERS"| lolcat
-echo -e ""
+# Check If Username Exist, Else Proceed
+egrep "^$User" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "\e[93m           Script by IEPH           "
+echo -e "\e[0m                                                   "
+echo -e "\e[93m              Username Already Exist              "
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
+exit 0
+else
+read -p "         Password       :  " Pass
+read -p "         Active Days    :  " Days
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
+clear
+sleep 1
+MYIP=$(wget -qO- ipv4.icanhazip.com)
+Today=`date +%s`
+Days_Detailed=$(( $Days * 86400 ))
+Expire_On=$(($Today + $Days_Detailed))
+Expiration=$(date -u --date="1970-01-01 $Expire_On sec GMT" +%Y/%m/%d)
+Expiration_Display=$(date -u --date="1970-01-01 $Expire_On sec GMT" '+%d %b %Y')
+opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+useradd $User
+usermod -s /bin/false $User
+usermod -e  $Expiration $User
+egrep "^$User" /etc/passwd >/dev/null
+echo -e "$Pass\n$Pass\n"|passwd $User &> /dev/null
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "\e[93m           Script by IEPH           "
+echo -e "\e[0m                                                   "
+echo -e "         Username        :  $User"
+echo -e "         Password        :  $Pass"
+echo -e "         Expires on      :  $Expiration_Display"
+echo -e "\e[0m                                                   "	
+echo -e "         Host / IP       :  "$MYIP
+echo -e "         Port OpenVPN    :  "$openvpnport
+echo -e "              $MYIP:86/client.ovpn"
+echo -e "                                                  "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
+fi
